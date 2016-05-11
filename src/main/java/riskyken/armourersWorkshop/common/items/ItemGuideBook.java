@@ -10,8 +10,8 @@ import riskyken.plushieWrapper.common.entity.PlushieEntityPlayer;
 import riskyken.plushieWrapper.common.item.PlushieItemStack;
 import riskyken.plushieWrapper.common.world.BlockLocation;
 import riskyken.plushieWrapper.common.world.WorldPointer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemGuideBook extends AbstractModItemNew {
 

@@ -8,9 +8,9 @@ import riskyken.armourersWorkshop.common.inventory.ContainerColourMixer;
 import riskyken.armourersWorkshop.common.tileentities.TileEntityArmourer;
 import riskyken.armourersWorkshop.common.tileentities.TileEntityColourMixer;
 import riskyken.armourersWorkshop.utils.UtilColour.ColourFamily;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageClientGuiButton implements IMessage, IMessageHandler<MessageClientGuiButton, IMessage> {
 
@@ -57,10 +57,10 @@ public class MessageClientGuiButton implements IMessage, IMessageHandler<Message
                 armourerBrain.toggleHelper();
             }
             if (message.buttonId == 11) {
-                //armourerBrain.cloneToSide(ForgeDirection.WEST);
+                //armourerBrain.cloneToSide(EnumFacing.WEST);
             }
             if (message.buttonId == 12) {
-                //armourerBrain.cloneToSide(ForgeDirection.EAST);
+                //armourerBrain.cloneToSide(EnumFacing.EAST);
             }
         }
         

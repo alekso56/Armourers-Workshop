@@ -4,10 +4,10 @@ import java.util.Random;
 
 import com.mojang.authlib.GameProfile;
 
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -22,7 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.items.ModItems;
@@ -67,7 +67,7 @@ public class BlockDoll extends AbstractModBlockContainer {
     }
     
     @Override
-    public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection axis) {
+    public boolean rotateBlock(World world, int x, int y, int z, EnumFacing axis) {
         if (world.isRemote) {
             return false;
         }

@@ -9,10 +9,10 @@ import org.apache.logging.log4j.Level;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.config.GuiButtonExt;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.client.config.GuiButtonExt;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -89,7 +89,7 @@ public class GuiArmourLibrary extends GuiContainer {
     
     @Override
     public void initGui() {
-        ScaledResolution reso = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        ScaledResolution reso = new ScaledResolution(mc);
         this.xSize = reso.getScaledWidth();
         this.ySize = reso.getScaledHeight();
         super.initGui();
@@ -139,8 +139,8 @@ public class GuiArmourLibrary extends GuiContainer {
         fileSwitchRemotePrivate.setIconLocation(0, 62, 50, 30);
         
         if (mc.isSingleplayer()) {
-            fileSwitchRemotePublic.enabled = false;
-            fileSwitchRemotePrivate.enabled = false;
+            fileSwitchRemotePublic.setPressed(true);
+            fileSwitchRemotePrivate.setPressed(true);
             fileSwitchRemotePublic.setDisableText(GuiHelper.getLocalizedControlName(guiName, "rollover.notOnServer"));
             fileSwitchRemotePrivate.setDisableText(GuiHelper.getLocalizedControlName(guiName, "rollover.notOnServer"));
             fileSwitchlocal.setPressed(true);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import riskyken.armourersWorkshop.proxies.ClientProxy;
 import riskyken.plushieWrapper.client.IRenderBuffer;
 
@@ -18,9 +18,9 @@ public class CustomTexturedQuad extends TexturedQuad {
     }
     
     public void draw(IRenderBuffer renderBuffer, float scale, int x, int y, int z, byte r, byte g, byte b, byte a) {
-        Vec3 vec3 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[0].vector3D);
-        Vec3 vec31 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[2].vector3D);
-        Vec3 vec32 = vec31.crossProduct(vec3).normalize();
+        Vec3d vec3 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[0].vector3D);
+        Vec3d vec31 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[2].vector3D);
+        Vec3d vec32 = vec31.crossProduct(vec3).normalize();
         renderBuffer.setNormal((float)vec32.xCoord, (float)vec32.yCoord, (float)vec32.zCoord);
         renderBuffer.setColourRGBA_B(r, g, b, a);
         for (int i = 0; i < 4; ++i) {
@@ -35,9 +35,9 @@ public class CustomTexturedQuad extends TexturedQuad {
     }
 
     public void buildDisplayListArray(ArrayList<ColouredVertexWithUV> vertexList, float scale, int x, int y, int z, byte r, byte g, byte b, byte a, byte paintType) {
-        Vec3 vec3 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[0].vector3D);
-        Vec3 vec31 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[2].vector3D);
-        Vec3 vec32 = vec31.crossProduct(vec3).normalize();
+        Vec3d vec3 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[0].vector3D);
+        Vec3d vec31 = this.vertexPositions[1].vector3D.subtract(this.vertexPositions[2].vector3D);
+        Vec3d vec32 = vec31.crossProduct(vec3).normalize();
         for (int i = 0; i < 4; ++i) {
             PositionTextureVertex positiontexturevertex = this.vertexPositions[i];
             ColouredVertexWithUV cVer = new ColouredVertexWithUV(

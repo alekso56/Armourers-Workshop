@@ -6,14 +6,13 @@ import java.util.List;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.StatCollector;
-
+import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiHelper {
@@ -32,7 +31,7 @@ public class GuiHelper {
     
     public static void renderLocalizedGuiName(FontRenderer fontRenderer, int xSize, String name, String append, int colour) {
         String unlocalizedName = "inventory." + LibModInfo.ID.toLowerCase() + ":" + name + ".name";
-        String localizedName = StatCollector.translateToLocal(unlocalizedName);
+        String localizedName = I18n.translateToLocal(unlocalizedName);
         String renderText = unlocalizedName;
         if (!unlocalizedName.equals(localizedName)){
             renderText = localizedName;
@@ -46,7 +45,7 @@ public class GuiHelper {
     
     public static String getLocalizedControlName(String guiName, String controlName) {
         String unlocalizedName = "inventory." + LibModInfo.ID.toLowerCase() + ":" + guiName + "." + controlName;
-        String localizedName = StatCollector.translateToLocal(unlocalizedName);
+        String localizedName = I18n.translateToLocal(unlocalizedName);
         if (!unlocalizedName.equals(localizedName)){
             return localizedName;
         }

@@ -81,4 +81,10 @@ public class RecipeSkinDye implements IRecipe {
     public ItemStack getRecipeOutput() {
         return null;
     }
+
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

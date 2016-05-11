@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.Level;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,7 +18,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.client.lib.LibBlockResources;
 import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.items.block.ModItemBlock;
@@ -146,7 +146,7 @@ public class BlockSkinnable extends AbstractModBlockContainer {
     }
     
     @Override
-    public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection axis) {
+    public boolean rotateBlock(World world, int x, int y, int z, EnumFacing axis) {
         if (world.isRemote) {
             return false;
         }

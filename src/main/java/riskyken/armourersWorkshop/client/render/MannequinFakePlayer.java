@@ -4,10 +4,9 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatBase;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.mojang.authlib.GameProfile;
@@ -74,9 +73,9 @@ public class MannequinFakePlayer extends AbstractClientPlayer {
     }
     
     @Override public boolean canCommandSenderUseCommand(int i, String s){ return false; }
-    @Override public ChunkCoordinates getPlayerCoordinates()
+    @Override public BlockPos getPlayerCoordinates()
     {
-        return new ChunkCoordinates(0,0,0);
+        return new BlockPos(0,0,0);
     }
 
     @Override public void addChatComponentMessage(IChatComponent chatmessagecomponent){}

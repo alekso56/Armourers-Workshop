@@ -3,15 +3,17 @@ package riskyken.armourersWorkshop.common.skin;
 import java.util.ArrayList;
 import java.util.BitSet;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.inventory.IInventorySlotUpdate;
@@ -25,7 +27,7 @@ import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
-public class ExPropsPlayerEquipmentData implements IExtendedEntityProperties, IInventorySlotUpdate {
+public class ExPropsPlayerEquipmentData implements ICapabilityProvider, IInventorySlotUpdate {
 
     public static final int MAX_SLOTS_PER_SKIN_TYPE = 5;
     public static final String TAG_EXT_PROP_NAME = "playerCustomEquipmentData";
@@ -248,4 +250,16 @@ public class ExPropsPlayerEquipmentData implements IExtendedEntityProperties, II
             }
         }
     }
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

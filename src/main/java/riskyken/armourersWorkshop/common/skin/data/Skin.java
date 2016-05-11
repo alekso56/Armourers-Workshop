@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
@@ -94,7 +94,7 @@ public class Skin implements ISkin {
         
         if (getPartCount() == 0) {
             for (int i = 0; i < getSkinType().getSkinParts().size(); i++) {
-                ISkinPartType part = getSkinType().getSkinParts().get(i);
+                ISkinPartType part = (ISkinPartType) getSkinType().getSkinParts().get(i);
                 
                 IRectangle3D skinRec = part.getGuideSpace();
                 

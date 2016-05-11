@@ -5,11 +5,10 @@ import java.util.Collections;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -98,7 +97,7 @@ public class RenderBlockSkinnable extends TileEntitySpecialRenderer {
     }
     
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTickTime) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTickTime, int destroyStage) {
         renderList.add(new RenderLast(tileEntity, x, y, z));
     }
     

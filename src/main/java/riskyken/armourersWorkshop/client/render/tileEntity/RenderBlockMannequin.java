@@ -5,8 +5,8 @@ import org.lwjgl.opengl.GL11;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -460,7 +460,7 @@ public class RenderBlockMannequin extends TileEntitySpecialRenderer {
     }
     
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTickTime) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTickTime, int destroyStage) {
         renderTileEntityAt((TileEntityMannequin)tileEntity, x, y, z, partialTickTime);
     }
 }

@@ -7,12 +7,12 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartUpdateEvent;
 import riskyken.armourersWorkshop.common.blocks.ModBlocks;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class DollCraftingHandler {
 
@@ -22,10 +22,10 @@ public class DollCraftingHandler {
     
     @SubscribeEvent
     public void onMinecartUpdateEvent(MinecartUpdateEvent event) {
-        World world = event.minecart.worldObj;
-        EntityMinecart minecart = event.minecart;
+        World world = event.getMinecart().worldObj;
+        EntityMinecart minecart = event.getMinecart();
         
-        List<Entity> entities;
+        List<EntityItem> entities;
         
         AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(
                 minecart.posX - 0.5D, minecart.posY - 0.5D, minecart.posZ - 0.5D,

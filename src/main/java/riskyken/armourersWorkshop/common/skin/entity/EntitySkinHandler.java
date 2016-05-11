@@ -14,9 +14,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import riskyken.armourersWorkshop.api.common.skin.entity.IEntitySkinHandler;
 import riskyken.armourersWorkshop.api.common.skin.entity.ISkinnableEntity;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class EntitySkinHandler implements IEntitySkinHandler {
     
@@ -52,14 +52,14 @@ public final class EntitySkinHandler implements IEntitySkinHandler {
     
     @SubscribeEvent
     public void onStartTracking(PlayerEvent.StartTracking event) {
-        if (event.entity.worldObj.isRemote) {
+        if (event.getEntity().worldObj.isRemote) {
             return;
         }
         
-        Entity entity = event.target;
+        Entity entity = event.getTarget();
         ExPropsEntityEquipmentData props = ExPropsEntityEquipmentData.getExtendedPropsForEntity(entity);
         if (props != null) {
-            props.sendEquipmentDataToPlayer((EntityPlayerMP) event.entityPlayer);
+            props.sendEquipmentDataToPlayer((EntityPlayerMP) event.getEntityPlayer());
         }
     }
     
@@ -83,9 +83,9 @@ public final class EntitySkinHandler implements IEntitySkinHandler {
     
     @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
-        if (isValidEntity(event.entity)) {
-            ISkinnableEntity skinnableEntity = entityMap.get(event.entity.getClass());
-            ExPropsEntityEquipmentData.register(event.entity, skinnableEntity);
+        if (isValidEntity(event.getEntity())) {
+            ISkinnableEntity skinnableEntity = entityMap.get(event.getEntity().getClass());
+            ExPropsEntityEquipmentData.register(event.getEntity(), skinnableEntity);
         }
     }
     

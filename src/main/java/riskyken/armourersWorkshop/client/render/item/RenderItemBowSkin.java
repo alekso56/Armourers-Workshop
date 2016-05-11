@@ -12,7 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.skin.IEntityEquipment;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.client.model.armourer.ModelArrow;
@@ -173,7 +173,7 @@ public class RenderItemBowSkin implements IItemRenderer {
                 int tarPart = getAnimationFrame(useCount);
                 if (skin.getParts().get(tarPart).getMarkerBlocks().size() > 0) {
                     CubeMarkerData cmd = skin.getParts().get(tarPart).getMarkerBlocks().get(0);
-                    ForgeDirection dir = ForgeDirection.getOrientation(cmd.meta - 1);
+                    EnumFacing dir = EnumFacing.getOrientation(cmd.meta - 1);
                     GL11.glTranslatef((-dir.offsetX + cmd.x) * scale, (-dir.offsetY + cmd.y) * scale, (dir.offsetZ + cmd.z) * scale);
                     //Shift the arrow a little to stop z fighting.
                     GL11.glTranslatef(-0.01F * scale, 0.01F * scale, -0.01F * scale);

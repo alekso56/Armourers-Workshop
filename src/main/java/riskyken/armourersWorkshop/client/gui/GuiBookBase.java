@@ -6,8 +6,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
@@ -20,8 +20,8 @@ import riskyken.armourersWorkshop.client.guidebook.IBookPage;
 import riskyken.armourersWorkshop.client.render.ModRenderHelper;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.utils.ModLogger;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuiBookBase extends GuiScreen {
@@ -178,7 +178,7 @@ public abstract class GuiBookBase extends GuiScreen {
     protected void enablePageFramebuffer() {
         mc.getFramebuffer().unbindFramebuffer();
         
-        ScaledResolution reso = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        ScaledResolution reso = new ScaledResolution(mc);
         
         double scaleWidth = (double)mc.displayWidth / reso.getScaledWidth_double();
         double scaleHeight = (double)mc.displayHeight / reso.getScaledHeight_double();

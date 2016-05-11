@@ -1,10 +1,10 @@
 package riskyken.armourersWorkshop.common.painting.tool;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 
 public abstract class AbstractToolOption {
@@ -24,7 +24,7 @@ public abstract class AbstractToolOption {
     }
     
     public String getLocalisedLabel() {
-        return StatCollector.translateToLocal(getUnlocalisedlabel());
+        return I18n.translateToLocal(getUnlocalisedlabel());
     }
     
     @SideOnly(Side.CLIENT)

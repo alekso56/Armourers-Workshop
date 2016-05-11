@@ -2,9 +2,9 @@ package riskyken.armourersWorkshop.client.handler;
 
 import java.util.HashMap;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -66,7 +66,7 @@ public final class EquipmentWardrobeHandler {
     
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Pre event) {
-        EntityPlayer player = event.entityPlayer;
+        EntityPlayer player = event.getEntityPlayer();
         if (player instanceof MannequinFakePlayer) {
             return;
         }
@@ -126,7 +126,7 @@ public final class EquipmentWardrobeHandler {
         
         int result = -1;
         //Hide the armour if it had been skinned.
-        ItemStack stack = player.getCurrentArmor(event.slot);
+        ItemStack stack = player.getCurrentArmor(event.getSlot());
         if (SkinNBTHelper.stackHasSkinData(stack)) {
             result = -2;
         }
@@ -139,6 +139,6 @@ public final class EquipmentWardrobeHandler {
                 result = -2;
             }
         }
-        event.result = result;
+        event.setResult(result);
     }
 }

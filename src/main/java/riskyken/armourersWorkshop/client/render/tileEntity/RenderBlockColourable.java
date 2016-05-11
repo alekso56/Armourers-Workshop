@@ -2,17 +2,17 @@ package riskyken.armourersWorkshop.client.render.tileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import riskyken.armourersWorkshop.client.render.ModRenderHelper;
@@ -72,7 +72,7 @@ public class RenderBlockColourable extends TileEntitySpecialRenderer {
         renderer.setColourRGBA_F(0.7F, 0.7F, 0.7F, markerAlpha);
         if (markerAlpha > 0F) {
             for (int i = 0; i < 6; i++) {
-                ForgeDirection dir = ForgeDirection.getOrientation(i);
+                EnumFacing dir = EnumFacing.getOrientation(i);
                 int paintType = cubeColour.getPaintType(i) & 0xFF;
                 if (paintType != 255) {
                     bindTexture(MARKERS);
@@ -89,35 +89,7 @@ public class RenderBlockColourable extends TileEntitySpecialRenderer {
         RenderHelper.enableStandardItemLighting();
     }
     
-    public void renderTileEntityAt(TileEntityBoundingBox tileEntity, double x, double y, double z, float partialTickTime) {
-        if (!(tileEntity.getSkinPart() instanceof ISkinPartTypeTextured)) {
-            return;
-        }
-        GL11.glDisable(GL11.GL_LIGHTING);
-        ModRenderHelper.enableAlphaBlend();
-        renderer.startDrawingQuads();
-        renderer.setColourRGBA_F(0.7F, 0.7F, 0.7F, markerAlpha);
-        if (markerAlpha > 0F) {
-            for (int i = 0; i < 6; i++) {
-                if (tileEntity.isPaintableSide(i)) {
-                    ForgeDirection dir = ForgeDirection.getOrientation(i);
-                    PaintType paintType = tileEntity.getPaintType(i);
-                    if (paintType != PaintType.NONE) {
-                        bindTexture(MARKERS);
-                        GL11.glColor3f(0.77F, 0.77F, 0.77F);
-                        renderFaceWithMarker(x, y, z, dir, paintType.ordinal());
-                    }
-                }
-            }
-        }
-        renderer.draw();
-        GL11.glColor4f(1F, 1F, 1F, 1F);
-        ModRenderHelper.disableAlphaBlend();
-        ModRenderHelper.enableLighting();
-        RenderHelper.enableStandardItemLighting();
-    }
-    
-    private void renderFaceWithMarker(double x, double y, double z, ForgeDirection face, int marker) {
+    private void renderFaceWithMarker(double x, double y, double z, EnumFacing face, int marker) {
         float tileScale = 0.25F;
         float ySrc = (float) Math.floor((double)marker / 4F);
         float xSrc = marker - (ySrc * 4);
@@ -181,8 +153,8 @@ public class RenderBlockColourable extends TileEntitySpecialRenderer {
     }
     
     private boolean isPlayerHoldingPaintingTool() {
-        EntityClientPlayerMP player = mc.thePlayer;
-        ItemStack stack = player.getCurrentEquippedItem();
+        EntityPlayerSP player = mc.thePlayer;
+        ItemStack stack = player.getHeldItemMainhand();
         if (stack != null) {
             Item item = stack.getItem();
             if (item instanceof IBlockPainter) {
@@ -195,4 +167,33 @@ public class RenderBlockColourable extends TileEntitySpecialRenderer {
         }
         return false;
     }
+
+	@Override
+	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTicks, int destroyStage) {
+		 if (!(tileEntity.getSkinPart() instanceof ISkinPartTypeTextured)) {
+	            return;
+	        }
+	        GL11.glDisable(GL11.GL_LIGHTING);
+	        ModRenderHelper.enableAlphaBlend();
+	        renderer.startDrawingQuads();
+	        renderer.setColourRGBA_F(0.7F, 0.7F, 0.7F, markerAlpha);
+	        if (markerAlpha > 0F) {
+	            for (int i = 0; i < 6; i++) {
+	                if (tileEntity.isPaintableSide(i)) {
+	                    EnumFacing dir = EnumFacing.getOrientation(i);
+	                    PaintType paintType = tileEntity.getPaintType(i);
+	                    if (paintType != PaintType.NONE) {
+	                        bindTexture(MARKERS);
+	                        GL11.glColor3f(0.77F, 0.77F, 0.77F);
+	                        renderFaceWithMarker(x, y, z, dir, paintType.ordinal());
+	                    }
+	                }
+	            }
+	        }
+	        renderer.draw();
+	        GL11.glColor4f(1F, 1F, 1F, 1F);
+	        ModRenderHelper.disableAlphaBlend();
+	        ModRenderHelper.enableLighting();
+	        RenderHelper.enableStandardItemLighting();
+	}
 }

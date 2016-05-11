@@ -7,7 +7,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import riskyken.armourersWorkshop.common.painting.PaintType;
@@ -130,7 +130,7 @@ public class TileEntityBoundingBox extends TileEntity {
     }
     
     public boolean isPaintableSide(int side) {
-        ForgeDirection sideBlock = ForgeDirection.getOrientation(side);
+        EnumFacing sideBlock = EnumFacing.getOrientation(side);
         if (worldObj.getBlock(xCoord + sideBlock.offsetX, yCoord + sideBlock.offsetY, zCoord + sideBlock.offsetZ) == getBlockType()) {
             return false;
         }

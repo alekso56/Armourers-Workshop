@@ -1,5 +1,6 @@
 package riskyken.armourersWorkshop.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
@@ -7,7 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -28,9 +29,9 @@ import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.tileentities.TileEntityMiniArmourer;
 import riskyken.armourersWorkshop.utils.UtilColour;
 import riskyken.armourersWorkshop.utils.UtilColour.ColourFamily;
-import cpw.mods.fml.client.config.GuiButtonExt;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.client.config.GuiButtonExt;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiMiniArmourerBuilding extends GuiScreen implements IDropDownListCallback {
@@ -124,7 +125,7 @@ public class GuiMiniArmourerBuilding extends GuiScreen implements IDropDownListC
         
         String guiName = tileEntity.getInventoryName();
         String localizedName = "inventory." + LibModInfo.ID.toLowerCase() + ":" + guiName + ".name";
-        localizedName = StatCollector.translateToLocal(localizedName);
+        localizedName = I18n.translateToLocal(localizedName);
         
         drawTextCentered(localizedName, this.width / 2, 2, UtilColour.getMinecraftColor(0, ColourFamily.MINECRAFT));
         drawTextCentered("WARNING - This block is unfinished.", this.width / 2, 12, 0xFF0000);
@@ -173,12 +174,12 @@ public class GuiMiniArmourerBuilding extends GuiScreen implements IDropDownListC
     }
     
     @Override
-    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_) {
+    protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_) throws IOException {
         super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
     }
 
     @Override
-    protected void keyTyped(char key, int keyCode) {
+    protected void keyTyped(char key, int keyCode) throws IOException {
         super.keyTyped(key, keyCode);
         if (keyCode == 1 || keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
             this.mc.thePlayer.closeScreen();

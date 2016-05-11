@@ -1,14 +1,16 @@
 package riskyken.armourersWorkshop.client.handler;
 
+import java.util.Collection;
 import java.util.List;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.GuiPlayerInfo;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.network.NetworkPlayerInfo;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.client.model.bake.ModelBakery;
@@ -27,32 +29,32 @@ public class DebugTextHandler {
         if (!ConfigHandler.showF3DebugInfo) {
             return;
         }
-        if (event.left != null && event.left.size() > 0) {
-            EntityClientPlayerMP localPlayer = Minecraft.getMinecraft().thePlayer;
-            List playerList = localPlayer.sendQueue.playerInfoList;
-            event.left.add("");
-            event.left.add(EnumChatFormatting.GOLD + "[" + LibModInfo.NAME + "]");
+        if (event.getLeft() != null && event.getLeft().size() > 0) {
+            EntityPlayerSP localPlayer = Minecraft.getMinecraft().thePlayer;
+            Collection<NetworkPlayerInfo> playerList = localPlayer.sendQueue.getPlayerInfoMap();
+            event.getLeft().add("");
+            event.getLeft().add(TextFormatting.GOLD + "[" + LibModInfo.NAME + "]");
             String dataLine = "";
             dataLine += "sc:" + ArmourersWorkshop.proxy.getPlayerModelCacheSize() + " ";
             dataLine += "pc:" + ClientSkinCache.INSTANCE.getPartCount() + " ";
             dataLine += "mc:" + ClientSkinCache.INSTANCE.getModelCount() + " ";
             dataLine += "pd:" + SkinModelRenderer.INSTANCE.getSkinDataMapSize() + " ";
-            event.left.add(dataLine);
+            event.getLeft().add(dataLine);
             dataLine = "bq:" + ModelBakery.INSTANCE.getBakingQueueSize() + " ";
             dataLine += "rq:" + ClientSkinCache.INSTANCE.getRequestQueueSize() + " ";
             dataLine += "sr:" + ModClientFMLEventHandler.skinRenderLastTick + " ";
             dataLine += "tc:" + ClientSkinPaintCache.INSTANCE.size() + " ";
             if (!Minecraft.getMinecraft().isIntegratedServerRunning()) {
                 for (int i = 0; i < playerList.size(); i++) {
-                    GuiPlayerInfo player = (GuiPlayerInfo) playerList.get(i);
-                    if (player.name.equals(localPlayer.getCommandSenderName())) {
-                        dataLine += " ping:" + player.responseTime + "ms";
+                	NetworkPlayerInfo player = Minecraft.getMinecraft().getNetHandler().getPlayerInfo(localPlayer.getUniqueID());
+                    if (player.getGameProfile().getName().equals(localPlayer.getName())) {
+                        dataLine += " ping:" + player.getResponseTime() + "ms";
                         break;
                     }
                 } 
             }
             
-            event.left.add(dataLine);
+            event.getLeft().add(dataLine);
         }
     }
 }

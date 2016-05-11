@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Level;
 
 import com.mojang.authlib.GameProfile;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,7 +20,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.painting.IPantableBlock;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
@@ -55,7 +55,7 @@ public class TileEntityArmourer extends AbstractTileEntityInventory implements I
     private static final String TAG_PAINT_DATA = "paintData";
     private static final int HEIGHT_OFFSET = 1;
     
-    private ForgeDirection direction;
+    private EnumFacing direction;
     private GameProfile gameProfile = null;
     private GameProfile newProfile = null;
     private ISkinType skinType;
@@ -68,7 +68,7 @@ public class TileEntityArmourer extends AbstractTileEntityInventory implements I
     public SkinTexture skinTexture;
     
     public TileEntityArmourer() {
-        this.direction = ForgeDirection.NORTH;
+        this.direction = EnumFacing.NORTH;
         this.skinType = SkinTypeRegistry.INSTANCE.getSkinTypeFromRegistryName("armourers:head");
         this.items = new ItemStack[2];
         this.showOverlay = true;
@@ -279,13 +279,13 @@ public class TileEntityArmourer extends AbstractTileEntityInventory implements I
         }
     }
     
-    public void setDirection(ForgeDirection direction) {
+    public void setDirection(EnumFacing direction) {
         this.direction = direction;
         this.markDirty();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
     
-    public ForgeDirection getDirection() {
+    public EnumFacing getDirection() {
         return direction;
     }
     
@@ -409,7 +409,7 @@ public class TileEntityArmourer extends AbstractTileEntityInventory implements I
     @Override
     public void readCommonFromNBT(NBTTagCompound compound) {
         super.readCommonFromNBT(compound);
-        direction = ForgeDirection.getOrientation(compound.getByte(TAG_DIRECTION));
+        direction = EnumFacing.getOrientation(compound.getByte(TAG_DIRECTION));
         skinType = SkinTypeRegistry.INSTANCE.getSkinTypeFromRegistryName(compound.getString(TAG_TYPE));
         //Update code for old saves
         if (skinType == null && compound.hasKey(TAG_TYPE_OLD)) {

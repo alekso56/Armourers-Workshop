@@ -2,8 +2,8 @@ package riskyken.armourersWorkshop.common.items;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class ItemArmourContainer extends AbstractModItemArmour {

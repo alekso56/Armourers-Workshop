@@ -28,7 +28,7 @@ public class ModelBlockSkinnable extends ModelBase {
         Minecraft.getMinecraft().renderEngine.bindTexture(modelImage);
         GL11.glColor3f(1F, 1F, 1F);
         if (tileEntity != null) {
-            float angle = (((tileEntity.getWorldObj().getTotalWorldTime() + tileEntity.hashCode()) % 360) + partialTickTime);
+            float angle = (((tileEntity.getWorld().getTotalWorldTime() + tileEntity.hashCode()) % 360) + partialTickTime);
             setRotateAngle(this.spinningCube, (float)Math.toRadians(angle * 4), (float)Math.toRadians(angle), (float)Math.toRadians(angle * 2));
         } else {
             setRotateAngle(this.spinningCube, 0F, 0F, 0F);

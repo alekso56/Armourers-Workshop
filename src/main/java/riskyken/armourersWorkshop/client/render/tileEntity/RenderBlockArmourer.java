@@ -2,8 +2,8 @@ package riskyken.armourersWorkshop.client.render.tileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -26,7 +26,7 @@ public class RenderBlockArmourer extends TileEntitySpecialRenderer {
         
         ISkinType skinType = te.getSkinType();
         
-        ResourceLocation resourcelocation = AbstractClientPlayer.locationStevePng;
+        ResourceLocation resourcelocation = AbstractClientPlayer.getLocationSkin("Steve");
         EntityTextureInfo skinInfo = null;
         
         mc.mcProfiler.startSection("textureBind");
@@ -85,9 +85,8 @@ public class RenderBlockArmourer extends TileEntitySpecialRenderer {
         GL11.glEnable(GL11.GL_LIGHTING);
         mc.mcProfiler.endSection();
     }
-    
-    @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float tickTime) {
-        renderTileEntityAt((TileEntityArmourer)tileEntity, x, y, z, tickTime);
-    }
+	@Override
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage) {
+		renderTileEntityAt((TileEntityArmourer)te, x, y, z, partialTicks);
+	}
 }

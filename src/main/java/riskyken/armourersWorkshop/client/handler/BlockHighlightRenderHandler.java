@@ -2,16 +2,15 @@ package riskyken.armourersWorkshop.client.handler;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,9 +27,9 @@ public class BlockHighlightRenderHandler {
     public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
         EntityPlayer player = event.player;
         World world = event.player.worldObj;
-        MovingObjectPosition target = event.target;
+        RayTraceResult target = event.getTarget();
         
-        if (target != null && target.typeOfHit != MovingObjectType.BLOCK) {
+        if (target != null && target.typeOfHit != RayTraceResult.Type.BLOCK) {
             return;
         }
         

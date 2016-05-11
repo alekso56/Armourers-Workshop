@@ -6,9 +6,9 @@ import java.util.List;
 
 import com.mojang.authlib.GameProfile;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
@@ -24,7 +24,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.painting.IPantableBlock;
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
@@ -147,7 +147,7 @@ public class BlockBoundingBox extends AbstractModBlockContainer implements IPant
     
     @Override
     public boolean setColour(IBlockAccess world, int x, int y, int z, int colour, int side) {
-        ForgeDirection sideBlock = ForgeDirection.getOrientation(side);
+        EnumFacing sideBlock = EnumFacing.getOrientation(side);
         if (world.getBlock(x + sideBlock.offsetX, y + sideBlock.offsetY, z + sideBlock.offsetZ) == this) {
             return false;
         }
@@ -173,7 +173,7 @@ public class BlockBoundingBox extends AbstractModBlockContainer implements IPant
 
     @Override
     public int getColour(IBlockAccess world, int x, int y, int z, int side) {
-        ForgeDirection sideBlock = ForgeDirection.getOrientation(side);
+        EnumFacing sideBlock = EnumFacing.getOrientation(side);
         if (world.getBlock(x + sideBlock.offsetX, y + sideBlock.offsetY, z + sideBlock.offsetZ) == this) {
             return 0x00FFFFFF;
         }
@@ -206,7 +206,7 @@ public class BlockBoundingBox extends AbstractModBlockContainer implements IPant
     
     @Override
     public void setPaintType(IBlockAccess world, int x, int y, int z, PaintType paintType, int side) {
-        ForgeDirection sideBlock = ForgeDirection.getOrientation(side);
+        EnumFacing sideBlock = EnumFacing.getOrientation(side);
         if (world.getBlock(x + sideBlock.offsetX, y + sideBlock.offsetY, z + sideBlock.offsetZ) == this) {
             return;
         }
@@ -230,7 +230,7 @@ public class BlockBoundingBox extends AbstractModBlockContainer implements IPant
     
     @Override
     public PaintType getPaintType(IBlockAccess world, int x, int y, int z, int side) {
-        ForgeDirection sideBlock = ForgeDirection.getOrientation(side);
+        EnumFacing sideBlock = EnumFacing.getOrientation(side);
         if (world.getBlock(x + sideBlock.offsetX, y + sideBlock.offsetY, z + sideBlock.offsetZ) == this) {
             return PaintType.NORMAL;
         }

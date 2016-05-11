@@ -1,18 +1,18 @@
 package riskyken.armourersWorkshop.common.blocks;
 
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.client.lib.LibBlockResources;
 import riskyken.armourersWorkshop.common.items.block.ModItemBlock;
@@ -33,8 +33,8 @@ public class BlockArmourer extends AbstractModBlockContainer {
             EntityPlayer player = (EntityPlayer)entity;
             TileEntity te = world.getTileEntity(x, y, z);
             if (te != null && te instanceof TileEntityArmourer) {
-                ForgeDirection direction = ForgeDirection.getOrientation(UtilBlocks.determineOrientationSide(world, x, y, z, entity));
-                ((TileEntityArmourer)te).setDirection(ForgeDirection.NORTH);
+                EnumFacing direction = EnumFacing.getOrientation(UtilBlocks.determineOrientationSide(world, x, y, z, entity));
+                ((TileEntityArmourer)te).setDirection(EnumFacing.NORTH);
                 if (!world.isRemote) {
                     ((TileEntityArmourer)te).setGameProfile(player.getGameProfile());
                     ((TileEntityArmourer)te).onPlaced();

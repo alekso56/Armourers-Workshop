@@ -1,12 +1,13 @@
 package riskyken.armourersWorkshop.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.client.config.GuiUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -82,7 +83,7 @@ public class GuiToolOptions extends GuiScreen {
     }
     
     @Override
-    protected void keyTyped(char key, int keyCode) {
+    protected void keyTyped(char key, int keyCode) throws IOException {
         super.keyTyped(key, keyCode);
         if (keyCode == 1 || keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
             this.mc.thePlayer.closeScreen();

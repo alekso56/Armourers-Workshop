@@ -3,10 +3,11 @@ package riskyken.armourersWorkshop.common.skin.type;
 import java.util.ArrayList;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import riskyken.armourersWorkshop.api.common.skin.type.IIcon;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SkinArrow extends AbstractSkinTypeBase {
     
@@ -45,4 +46,16 @@ public class SkinArrow extends AbstractSkinTypeBase {
         this.icon = register.registerIcon(LibItemResources.TEMPLATE_ARROW);
         this.emptySlotIcon = register.registerIcon(LibItemResources.SLOT_SKIN_ARROW);
     }
+
+	@Override
+	public IIcon getIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IIcon getEmptySlotIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

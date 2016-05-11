@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop.common.tileentities;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -9,7 +9,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
@@ -93,7 +93,7 @@ public class TileEntitySkinnable extends TileEntity {
     }
 
     private void rotateBlockBounds() {
-        ForgeDirection dir = ForgeDirection.UNKNOWN;
+        EnumFacing dir = EnumFacing.UNKNOWN;
         int meta = getBlockMetadata() % 4;
         
         float oldMinX = minX;
@@ -102,16 +102,16 @@ public class TileEntitySkinnable extends TileEntity {
         float oldMaxZ = maxZ;
         
         if (meta == 0) {
-            dir = ForgeDirection.SOUTH;
+            dir = EnumFacing.SOUTH;
         }
         if (meta == 1) {
-            dir = ForgeDirection.WEST;
+            dir = EnumFacing.WEST;
         }
         if (meta == 2) {
-            dir = ForgeDirection.NORTH;
+            dir = EnumFacing.NORTH;
         }
         if (meta == 3) {
-            dir = ForgeDirection.EAST;
+            dir = EnumFacing.EAST;
         }
         
         switch (dir) {

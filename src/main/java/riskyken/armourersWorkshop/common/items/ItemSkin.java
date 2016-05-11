@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.gui.GuiScreen;
@@ -17,7 +17,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
@@ -169,7 +169,7 @@ public class ItemSkin extends AbstractModItem {
         SkinPointer skinPointer = SkinNBTHelper.getSkinPointerFromStack(stack);
         
         if (skinPointer != null && skinPointer.getSkinType() == SkinTypeRegistry.skinBlock) {
-            ForgeDirection dir = ForgeDirection.getOrientation(side);
+            EnumFacing dir = EnumFacing.getOrientation(side);
             Block replaceBlock = world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
             if (replaceBlock.isReplaceable(world, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)) {
                 placeSkinAtLocation(world, player, side, stack, x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, skinPointer);

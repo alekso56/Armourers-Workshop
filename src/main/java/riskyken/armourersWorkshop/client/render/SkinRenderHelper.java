@@ -2,14 +2,14 @@ package riskyken.armourersWorkshop.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
@@ -24,7 +24,7 @@ public final class SkinRenderHelper {
     
     public static void renderBuildingGuide(ISkinType skinType, float scale, boolean showSkinOverlay, boolean showHelper) {
         for (int i = 0; i < skinType.getSkinParts().size(); i++) {
-            ISkinPartType skinPart = skinType.getSkinParts().get(i);
+            ISkinPartType skinPart = (ISkinPartType) skinType.getSkinParts().get(i);
             IPoint3D partOffset = skinPart.getOffset();
             GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
             skinPart.renderBuildingGuide(scale, showSkinOverlay, showHelper);
@@ -34,7 +34,7 @@ public final class SkinRenderHelper {
     
     public static void renderBuildingGrid(ISkinType skinType, float scale) {
         for (int i = 0; i < skinType.getSkinParts().size(); i++) {
-            ISkinPartType skinPartType = skinType.getSkinParts().get(i);
+            ISkinPartType skinPartType = (ISkinPartType) skinType.getSkinParts().get(i);
             IPoint3D partOffset = skinPartType.getOffset();
             GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
             renderBuildingGrid(skinPartType, scale);
@@ -80,15 +80,15 @@ public final class SkinRenderHelper {
     }
     
     private static void renderGuideBox(double x, double y, double z, int width, int height, int depth, float scale) {
-        renderGuideFace(ForgeDirection.DOWN, x, y, z, width, depth, scale);
-        renderGuideFace(ForgeDirection.UP, x, y + height, z, width, depth, scale);
-        renderGuideFace(ForgeDirection.EAST, x + width, y, z, depth, height, scale);
-        renderGuideFace(ForgeDirection.WEST, x, y, z, depth, height, scale);
-        renderGuideFace(ForgeDirection.NORTH, x, y, z, width, height, scale);
-        renderGuideFace(ForgeDirection.SOUTH, x, y, z + depth, width, height, scale);
+        renderGuideFace(EnumFacing.DOWN, x, y, z, width, depth, scale);
+        renderGuideFace(EnumFacing.UP, x, y + height, z, width, depth, scale);
+        renderGuideFace(EnumFacing.EAST, x + width, y, z, depth, height, scale);
+        renderGuideFace(EnumFacing.WEST, x, y, z, depth, height, scale);
+        renderGuideFace(EnumFacing.NORTH, x, y, z, width, height, scale);
+        renderGuideFace(EnumFacing.SOUTH, x, y, z + depth, width, height, scale);
     }
     
-    private static void renderGuideFace(ForgeDirection dir, double x, double y, double z, double sizeX, double sizeY, float scale) {
+    private static void renderGuideFace(EnumFacing dir, double x, double y, double z, double sizeX, double sizeY, float scale) {
         RenderManager renderManager = RenderManager.instance;
         Tessellator tessellator = Tessellator.instance;
         

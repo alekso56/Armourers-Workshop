@@ -11,9 +11,9 @@ import riskyken.armourersWorkshop.api.client.render.entity.ISkinnableEntityRende
 import riskyken.armourersWorkshop.api.common.skin.entity.ISkinnableEntity;
 import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
 import riskyken.armourersWorkshop.common.skin.entity.ExPropsEntityEquipmentData;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public final class EntitySkinRenderHandler {
@@ -57,7 +57,7 @@ public final class EntitySkinRenderHandler {
     
     @SubscribeEvent
     public void onRenderLivingEvent(RenderLivingEvent.Post event) {
-        EntityLivingBase entity = event.entity;
+        EntityLivingBase entity = event.getEntity();
         if (entity instanceof EntityPlayer) {
             return;
         }
@@ -67,7 +67,7 @@ public final class EntitySkinRenderHandler {
             if (props == null) {
                 return;
             }
-            renderer.render(entity, event.renderer, event.x, event.y, event.z, props.getEquipmentData());
+            renderer.render(entity, event.getRenderer(), event.getX(), event.getY(), event.getZ(), props.getEquipmentData());
         }
     }
 }

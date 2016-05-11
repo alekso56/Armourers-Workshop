@@ -12,7 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
@@ -186,10 +186,10 @@ public class GuiMiniArmourerBuildingModel {
                 MiniCube tarCube = renderCubes.get(cubeId - 1);
                 
                 MiniCube newCube = new MiniCube(CubeRegistry.INSTANCE.getCubeFormId((byte) 0));
-                ForgeDirection dir = getDirectionForCubeFace(cubeFace);
-                newCube.setX((byte) (tarCube.getX() + dir.offsetX));
-                newCube.setY((byte) (tarCube.getY() + dir.offsetY));
-                newCube.setZ((byte) (tarCube.getZ() + dir.offsetZ));
+                EnumFacing dir = getDirectionForCubeFace(cubeFace);
+                newCube.setX((byte) (tarCube.getX() + dir.getFrontOffsetX()));
+                newCube.setY((byte) (tarCube.getY() + dir.getFrontOffsetY()));
+                newCube.setZ((byte) (tarCube.getZ() + dir.getFrontOffsetZ()));
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -241,10 +241,10 @@ public class GuiMiniArmourerBuildingModel {
             if (button == 0) {
                 MiniCube newCube = new MiniCube(CubeRegistry.INSTANCE.getCubeFormId((byte) 0));
                 newCube.setColour(0xFFFFFFFF);
-                ForgeDirection dir = getDirectionForCubeFace(cubeFace);
-                newCube.setX((byte) (tarCube.getX() + dir.offsetX));
-                newCube.setY((byte) (tarCube.getY() + dir.offsetY));
-                newCube.setZ((byte) (tarCube.getZ() + dir.offsetZ));
+                EnumFacing dir = getDirectionForCubeFace(cubeFace);
+                newCube.setX((byte) (tarCube.getX() + dir.getFrontOffsetX()));
+                newCube.setY((byte) (tarCube.getY() + dir.getFrontOffsetY()));
+                newCube.setZ((byte) (tarCube.getZ() + dir.getFrontOffsetZ()));
                 cubes.add(newCube);
                 //newCube.setId((byte) 0);
                 
@@ -388,29 +388,29 @@ public class GuiMiniArmourerBuildingModel {
         return id;
     }
     
-    private ForgeDirection getDirectionForCubeFace(int cubeFace) {
-        ForgeDirection dir;
+    private EnumFacing getDirectionForCubeFace(int cubeFace) {
+        EnumFacing dir;
         switch (cubeFace) {
         case 1:
-            dir = ForgeDirection.EAST;
+            dir = EnumFacing.EAST;
             break;
         case 0:
-            dir = ForgeDirection.WEST;
+            dir = EnumFacing.WEST;
             break;
         case 4:
-            dir = ForgeDirection.DOWN;
+            dir = EnumFacing.DOWN;
             break;
         case 5:
-            dir = ForgeDirection.UP;
+            dir = EnumFacing.UP;
             break;
         case 3:
-            dir = ForgeDirection.NORTH;
+            dir = EnumFacing.NORTH;
             break;
         case 2:
-            dir = ForgeDirection.SOUTH;
+            dir = EnumFacing.SOUTH;
             break;
         default:
-            dir = ForgeDirection.UNKNOWN;
+            dir = EnumFacing.UP;
             break;
         }
         return dir;

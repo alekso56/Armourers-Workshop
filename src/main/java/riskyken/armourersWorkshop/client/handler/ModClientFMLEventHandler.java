@@ -1,19 +1,19 @@
 package riskyken.armourersWorkshop.client.handler;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.event.ClickEvent;
-import net.minecraft.event.HoverEvent;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.util.text.event.HoverEvent;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -31,22 +31,22 @@ public class ModClientFMLEventHandler {
     
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
-        if (eventArgs.modID.equals(LibModInfo.ID)) {
+        if (eventArgs.getModID().equals(LibModInfo.ID)) {
             ConfigHandler.loadConfigFile();
         }
     }
     
     public void onPlayerTickEndEvent() {
-        EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
         
         if (!shownUpdateInfo && UpdateCheck.updateFound) {
             //http://minecraft.curseforge.com/mc-mods/229523-armourers-workshop/files
             shownUpdateInfo = true;
-            ChatComponentText updateMessage = new ChatComponentText(LibModInfo.NAME + " update " + UpdateCheck.remoteModVersion + " is available. ");
-            ChatComponentText updateURL = new ChatComponentText("[Download]");
+            TextComponentString updateMessage = new TextComponentString(LibModInfo.NAME + " update " + UpdateCheck.remoteModVersion + " is available. ");
+            TextComponentString updateURL = new TextComponentString("[Download]");
             updateURL.getChatStyle().setUnderlined(true);
-            updateURL.getChatStyle().setColor(EnumChatFormatting.BLUE);
-            updateURL.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText("Click to goto the download page")));
+            updateURL.getChatStyle().setColor(TextFormatting.BLUE);
+            updateURL.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("Click to goto the download page")));
             updateURL.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, DOWNLOAD_URL));
             updateMessage.appendSibling(updateURL);
             player.addChatMessage(updateMessage);

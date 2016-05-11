@@ -3,10 +3,10 @@ package riskyken.armourersWorkshop.common.network.messages.client;
 import java.util.Iterator;
 import java.util.Set;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -38,7 +38,7 @@ public class MessageClientGuiToolOptionUpdate implements IMessage, IMessageHandl
     public IMessage onMessage(MessageClientGuiToolOptionUpdate message, MessageContext ctx) {
         EntityPlayerMP player = ctx.getServerHandler().playerEntity;
         if (player != null) {
-            ItemStack stack = player.getCurrentEquippedItem();
+            ItemStack stack = player.getHeldItemMainhand();
             Item item = stack.getItem();
             
             if (item instanceof IConfigurableTool) {
@@ -47,7 +47,7 @@ public class MessageClientGuiToolOptionUpdate implements IMessage, IMessageHandl
                     stack.setTagCompound(new NBTTagCompound());
                 }
                 NBTTagCompound stackCompound = stack.getTagCompound();
-                Set keySet = newOptions.func_150296_c();
+                Set keySet = newOptions.getKeySet();
                 
                 Iterator iterator = keySet.iterator();
                 while (iterator.hasNext()) {

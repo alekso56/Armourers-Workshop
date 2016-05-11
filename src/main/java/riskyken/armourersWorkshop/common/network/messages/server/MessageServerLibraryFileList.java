@@ -2,12 +2,12 @@ package riskyken.armourersWorkshop.common.network.messages.server;
 
 import java.util.ArrayList;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.inventory.Container;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.common.library.LibraryFile;
@@ -53,7 +53,7 @@ public class MessageServerLibraryFileList implements IMessage, IMessageHandler<M
     
     @Override
     public IMessage onMessage(MessageServerLibraryFileList message, MessageContext ctx) {
-        EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
         Container container = player.openContainer;
         ArmourersWorkshop.proxy.libraryManager.setFileList(message.fileList, message.listType);
         return null;

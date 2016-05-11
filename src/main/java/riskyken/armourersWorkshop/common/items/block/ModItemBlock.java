@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 
 public class ModItemBlock extends ItemBlock {
 
@@ -25,7 +25,7 @@ public class ModItemBlock extends ItemBlock {
         String localized;
 
         unlocalized = itemStack.getUnlocalizedName() + ".flavour";
-        localized = StatCollector.translateToLocal(unlocalized);
+        localized = I18n.translateToLocal(unlocalized);
         if (!unlocalized.equals(localized)) {
             if (localized.contains("%n")) {
                 String[] split = localized.split("%n");

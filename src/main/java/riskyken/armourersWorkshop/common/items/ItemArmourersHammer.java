@@ -1,9 +1,9 @@
 package riskyken.armourersWorkshop.common.items;
 
 import buildcraft.api.tools.IToolWrench;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockChest;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.common.lib.LibItemNames;
 
@@ -34,7 +34,7 @@ public class ItemArmourersHammer extends AbstractModItem implements IToolWrench 
         Block block = world.getBlock(x, y, z);
         if (block != null) {
             if (block instanceof BlockBed) {
-                rotateBed(world, x, y, z, (BlockBed) block, ForgeDirection.getOrientation(side));
+                rotateBed(world, x, y, z, (BlockBed) block, EnumFacing.getOrientation(side));
                 player.swingItem();
                 return !world.isRemote;
             }
@@ -43,7 +43,7 @@ public class ItemArmourersHammer extends AbstractModItem implements IToolWrench 
                 return false;
             }
             
-            ForgeDirection dir = ForgeDirection.getOrientation(side);
+            EnumFacing dir = EnumFacing.getOrientation(side);
             if (player.isSneaking()) {
                 dir = dir.getOpposite();
             }
@@ -55,18 +55,18 @@ public class ItemArmourersHammer extends AbstractModItem implements IToolWrench 
         return false;
     }
     
-    private boolean rotateBed(World world, int x, int y, int z, BlockBed block, ForgeDirection axis) {
+    private boolean rotateBed(World world, int x, int y, int z, BlockBed block, EnumFacing axis) {
         int meta = world.getBlockMetadata(x, y, z);
-        ForgeDirection[] bedRots = {
-                ForgeDirection.SOUTH,
-                ForgeDirection.WEST,
-                ForgeDirection.NORTH,
-                ForgeDirection.EAST};
+        EnumFacing[] bedRots = {
+                EnumFacing.SOUTH,
+                EnumFacing.WEST,
+                EnumFacing.NORTH,
+                EnumFacing.EAST};
         
         int bedDir = ((BlockBed)block).getDirection(meta);
         
-        ForgeDirection bedRot = bedRots[bedDir];
-        ForgeDirection otherHalf = bedRot;
+        EnumFacing bedRot = bedRots[bedDir];
+        EnumFacing otherHalf = bedRot;
         boolean isHead = block.isBlockHeadOfBed(meta);
         if (isHead) {
             otherHalf = bedRot.getOpposite();
